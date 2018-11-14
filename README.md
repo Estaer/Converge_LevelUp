@@ -26,10 +26,9 @@ Android studio.
 Linux, macOS or Windows.
 
 ## Getting Started.
-Clone this repository onto your local machine `https://github.com/Estaer/Converge-LevelUp`
+Clone this repository onto your local machine `https://github.com/Estaer/Converge_LevelUp`
 
 Change directory into the Converge-LevelUp directory.
 `cd Converge-LevelUp`
 
 Then open and run your project in Android Studio.
-# Converge_LevelUp
