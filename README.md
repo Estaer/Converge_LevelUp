@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/Estaer/Converge_LevelUp.svg?style=svg)](https://circleci.com/gh/Estaer/Converge_LevelUp)
+[![Maintainability](https://api.codeclimate.com/v1/badges/43eb775f231ba821acdf/maintainability)](https://codeclimate.com/github/Estaer/Converge_LevelUp/maintainability)
+
 # Converge-LevelUp Project
 An android App that retrieves a list of Java developers in Nairobi.
 
