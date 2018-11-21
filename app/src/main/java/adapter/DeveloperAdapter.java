@@ -1,15 +1,17 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.esthernamanda.converge_levelup.DeveloperDetails;
 import com.example.esthernamanda.converge_levelup.R;
-import com.koushikdutta.ion.Ion;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.List;
 
@@ -22,13 +24,15 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
 
     public static final class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTxt;
-        private ImageView developerImg;
+        private View root;
+        private CircularImageView developerImg;
 
-        private MyViewHolder(View v) {
-            super(v);
+        private MyViewHolder(View view) {
+            super(view);
+            this.root =view;
 
-            nameTxt = v.findViewById(R.id.name_txt);
-            developerImg = v.findViewById(R.id.developer_img);
+            nameTxt = view.findViewById(R.id.name_txt);
+            developerImg = view.findViewById(R.id.developer_img);
         }
     }
 
@@ -53,9 +57,16 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
         final DeveloperModel developerModel = itemList.get(position);
         holder.nameTxt.setText(developerModel.username);
 
-        Ion.with(DeveloperAdapter.this.context)
-                .load("http://i.imgur.com/DvpvklR.png")
-                .intoImageView(holder.developerImg);
+        holder.developerImg.setImageResource(R.drawable.wallpaper2you_360918);
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DeveloperAdapter.this.context, DeveloperDetails.class);
+                context.startActivity(intent);
+
+            }
+        });
+
 
     }
 
