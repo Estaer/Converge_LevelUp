@@ -4,37 +4,64 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import adapter.DeveloperAdapter;
-import model.DeveloperModel;
+import model.GithubUsers;
+import model.GithubUsersResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import service.RequestInterface;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
-    private DeveloperAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+
+    private RecyclerView recyclerView;
+    private ArrayList<GithubUsers> data;
+    private DeveloperAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRecyclerView = findViewById(R.id.my_recycler_view);
 
-        mRecyclerView.setHasFixedSize(true);
+        initViews();
+    }
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+    private void initViews() {
+        recyclerView = findViewById(R.id.my_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        loadJSON();
+    }
 
-        ArrayList<DeveloperModel> myDataset = new ArrayList<>();
+    private void loadJSON() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.github.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RequestInterface request = retrofit.create(RequestInterface.class);
+        Call<GithubUsersResponse> call = request.getJSON();
+        call.enqueue(new Callback<GithubUsersResponse>() {
+            @Override
+            public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
+                GithubUsersResponse githubUsersResponse = response.body();
+                data = new ArrayList<>(Arrays.asList(githubUsersResponse.getItems()));
+                adapter = new DeveloperAdapter(data,MainActivity.this);
+                recyclerView.setAdapter(adapter);
+            }
 
-        myDataset.add(new DeveloperModel("Esther",R.mipmap.ic_launcher,"http:github.com/Estaer"));
-        myDataset.add(new DeveloperModel("Colline",R.mipmap.ic_launcher,"http:github.com/Colline"));
-        myDataset.add(new DeveloperModel("Huxy",R.mipmap.ic_launcher,"http:github.com/Huxy"));
-        myDataset.add(new DeveloperModel("Ronald",R.mipmap.ic_launcher,"http:github.com/Ronald"));
-        myDataset.add(new DeveloperModel("Isaac",R.mipmap.ic_launcher,"http:github.com/Isaac"));
+            @Override
+            public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
+                Log.d("Error",t.getMessage());
+            }
+        });
 
-        mAdapter = new DeveloperAdapter(myDataset,MainActivity.this);
-        mRecyclerView.setAdapter(mAdapter);
     }
 }

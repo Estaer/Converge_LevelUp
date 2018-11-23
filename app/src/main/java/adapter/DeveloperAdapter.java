@@ -12,14 +12,15 @@ import android.widget.TextView;
 import com.example.esthernamanda.converge_levelup.DeveloperDetails;
 import com.example.esthernamanda.converge_levelup.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import model.DeveloperModel;
+import model.GithubUsers;
 
 public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyViewHolder> {
 
-    private List<DeveloperModel> itemList;
+    private ArrayList<GithubUsers> itemList;
     private Context context;
 
     public static final class MyViewHolder extends RecyclerView.ViewHolder {
@@ -36,7 +37,7 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
         }
     }
 
-    public DeveloperAdapter(List<DeveloperModel> itemList, Context context) {
+    public DeveloperAdapter(ArrayList<GithubUsers> itemList, Context context) {
 
         this.itemList = itemList;
         this.context = context;
@@ -54,10 +55,13 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        final DeveloperModel developerModel = itemList.get(position);
-        holder.nameTxt.setText(developerModel.username);
+        final GithubUsers githubUsers = itemList.get(position);
+        holder.nameTxt.setText(githubUsers.getLogin());
 
-        holder.developerImg.setImageResource(R.drawable.wallpaper2you_360918);
+        Picasso.with(context).
+                load(githubUsers.getAvatar_url()).
+                into(holder.developerImg);
+
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
