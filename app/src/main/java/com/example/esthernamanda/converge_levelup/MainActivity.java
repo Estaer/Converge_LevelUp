@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import service.RequestInterface;
+
+import service.GithubApi;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RequestInterface request = retrofit.create(RequestInterface.class);
+
+        GithubApi request = retrofit.create(GithubApi.class);
         Call<GithubUsersResponse> call = request.getJSON();
         call.enqueue(new Callback<GithubUsersResponse>() {
             @Override
@@ -59,9 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
-                Log.d("Error",t.getMessage());
+                Toast.makeText(MainActivity.this,"Failed to Load. Please Retry!", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }
