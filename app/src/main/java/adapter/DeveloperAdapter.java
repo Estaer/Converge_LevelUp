@@ -14,6 +14,7 @@ import com.example.esthernamanda.converge_levelup.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 import model.GithubUsers;
@@ -22,6 +23,10 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
 
     private ArrayList<GithubUsers> itemList;
     private Context context;
+    public static String USERNAME="USERNAME";
+    public static String AVATAR_URL ="AVATAR_URL";
+    public static String ORGANISATION_URL = "ORGANISATION_URL";
+
 
     public static final class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView nameTxt;
@@ -66,6 +71,10 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DeveloperAdapter.this.context, DeveloperDetails.class);
+                intent.putExtra(USERNAME, githubUsers.getLogin());
+                intent.putExtra(AVATAR_URL, githubUsers.getAvatar_url());
+                intent.putExtra(ORGANISATION_URL, githubUsers.getOrganizations_url());
+
                 context.startActivity(intent);
 
             }
