@@ -5,12 +5,7 @@ public class GithubUsers {
     public String login;
     public String avatar_url;
     public String url;
-
-    public GithubUsers(String login, String avatar_url, String url) {
-        this.login = login;
-        this.avatar_url = avatar_url;
-        this.url = url;
-    }
+    public String organizations_url;
 
     public String getLogin() {
         return login;
@@ -34,5 +29,13 @@ public class GithubUsers {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getOrganizations_url() {
+        return organizations_url;
+    }
+
+    public void setOrganizations_url(String organizations_url) {
+        this.organizations_url = organizations_url;
     }
 }
