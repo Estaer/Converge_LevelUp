@@ -50,9 +50,6 @@ public class GithubPresenter {
 
                 recyclerView = activity.findViewById(R.id.my_recycler_view);
                 recyclerView.setHasFixedSize(true);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(layoutManager);
-
                 recyclerView.setAdapter(adapter);
             }
 
