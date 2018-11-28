@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import adapter.DeveloperAdapter;
+import adapter.GithubUsersAdapter;
 
 public class DeveloperDetails extends AppCompatActivity {
 
@@ -23,9 +23,9 @@ public class DeveloperDetails extends AppCompatActivity {
 
     public void  setData (){
         Intent intent = getIntent();
-        String username = intent.getStringExtra(DeveloperAdapter.USERNAME);
-        String avatar_url = intent.getStringExtra(DeveloperAdapter.AVATAR_URL);
-        String organisation_url = intent.getStringExtra(DeveloperAdapter.ORGANISATION_URL);
+        String username = intent.getStringExtra(GithubUsersAdapter.USERNAME);
+        String avatar_url = intent.getStringExtra(GithubUsersAdapter.AVATAR_URL);
+        String organisation_url = intent.getStringExtra(GithubUsersAdapter.ORGANISATION_URL);
 
         TextView username_txt = findViewById(R.id.username_details_txt);
         username_txt.setText(username);

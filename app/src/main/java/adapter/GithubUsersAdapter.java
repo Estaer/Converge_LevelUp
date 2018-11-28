@@ -14,12 +14,11 @@ import com.example.esthernamanda.converge_levelup.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 
 import model.GithubUsers;
 
-public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyViewHolder> {
+public class GithubUsersAdapter extends RecyclerView.Adapter<GithubUsersAdapter.MyViewHolder> {
 
     private ArrayList<GithubUsers> itemList;
     private Context context;
@@ -42,7 +41,7 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
         }
     }
 
-    public DeveloperAdapter(ArrayList<GithubUsers> itemList, Context context) {
+    public GithubUsersAdapter(ArrayList<GithubUsers> itemList, Context context) {
 
         this.itemList = itemList;
         this.context = context;
@@ -50,8 +49,8 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
 
     @NonNull
     @Override
-    public DeveloperAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                     int viewType) {
+    public GithubUsersAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                              int viewType) {
         View view =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_developer_list, parent, false);
         return new MyViewHolder(view);
@@ -70,7 +69,7 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.MyVi
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DeveloperAdapter.this.context, DeveloperDetails.class);
+                Intent intent = new Intent(GithubUsersAdapter.this.context, DeveloperDetails.class);
                 intent.putExtra(USERNAME, githubUsers.getLogin());
                 intent.putExtra(AVATAR_URL, githubUsers.getAvatar_url());
                 intent.putExtra(ORGANISATION_URL, githubUsers.getOrganizations_url());

@@ -11,7 +11,7 @@ import com.example.esthernamanda.converge_levelup.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import adapter.DeveloperAdapter;
+import adapter.GithubUsersAdapter;
 import model.GithubUsers;
 import model.GithubUsersResponse;
 import retrofit2.Call;
@@ -25,7 +25,7 @@ public class GithubPresenter {
 
     private RecyclerView recyclerView;
     private ArrayList<GithubUsers> data;
-    private DeveloperAdapter adapter;
+    private GithubUsersAdapter adapter;
     private Context context;
     private Activity activity;
 
@@ -46,7 +46,7 @@ public class GithubPresenter {
             public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                 GithubUsersResponse githubUsersResponse = response.body();
                 data = new ArrayList<>(Arrays.asList(githubUsersResponse.getItems()));
-                adapter = new DeveloperAdapter(data,context);
+                adapter = new GithubUsersAdapter(data,context);
 
                 recyclerView = activity.findViewById(R.id.my_recycler_view);
                 recyclerView.setHasFixedSize(true);
