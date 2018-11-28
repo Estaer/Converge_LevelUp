@@ -1,23 +1,23 @@
 package com.example.esthernamanda.converge_levelup;
 
-        import android.os.Parcelable;
-        import android.os.PersistableBundle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.support.v7.widget.LinearLayoutManager;
-        import android.support.v7.widget.RecyclerView;
+import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.os.PersistableBundle;
+import android.support.v7.widget.LinearLayoutManager;
 
-        import java.util.ArrayList;
-        import adapter.DeveloperAdapter;
-        import model.GithubUsers;
-        import presenter.GithubPresenter;
+import java.util.ArrayList;
+import adapter.GithubUsersAdapter;
+import model.GithubUsers;
+import presenter.GithubPresenter;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ArrayList<GithubUsers> data;
-    private DeveloperAdapter adapter;
+    private GithubUsersAdapter adapter;
     public final static String LIST_STATE_KEY = "recycler_list_state";
     RecyclerView.LayoutManager layoutManager;
     Parcelable listState;
