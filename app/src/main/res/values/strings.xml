@@ -2,4 +2,5 @@
     <string name="app_name">Java Developers</string>
     <string name="username">GitHub User</string>
     <string name="organisation">Andela Kenya</string>
+    <string name="share_title">Share</string>
 </resources>
