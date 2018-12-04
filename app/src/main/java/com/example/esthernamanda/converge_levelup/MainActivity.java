@@ -3,9 +3,9 @@ package com.example.esthernamanda.converge_levelup;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.PersistableBundle;
-import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import adapter.GithubUsersAdapter;
@@ -19,16 +19,17 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<GithubUsers> data;
     private GithubUsersAdapter adapter;
     public final static String LIST_STATE_KEY = "recycler_list_state";
-    RecyclerView.LayoutManager layoutManager;
+    GridLayoutManager gridLayoutManager;
     Parcelable listState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.my_recycler_view);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
         initViews();
     }
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
 
-        listState = layoutManager.onSaveInstanceState();
+        listState = gridLayoutManager.onSaveInstanceState();
         outState.putParcelable(LIST_STATE_KEY,listState);
     }
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if(listState != null){
-            layoutManager.onRestoreInstanceState(listState);
+            gridLayoutManager.onRestoreInstanceState(listState);
         }
     }
 }
