@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.os.PersistableBundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import adapter.GithubUsersAdapter;
 import model.GithubUsers;
 import presenter.GithubPresenter;
+import utils.NetworkConnectivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,9 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
 
+        NetworkConnectivity networkConnectivity = new NetworkConnectivity(MainActivity.this);
+        if(networkConnectivity.isNetworkConnected()) {
+            GithubPresenter githubPresenter = new GithubPresenter(MainActivity.this, this);
+            githubPresenter.loadJSON();
+        }
 
-        GithubPresenter githubPresenter = new GithubPresenter(MainActivity.this,this);
-        githubPresenter.loadJSON();
+        else {
+            Toast.makeText(MainActivity.this,"Failed to connect. Please reload.", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
